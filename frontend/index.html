@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Божественный проводник — Юлия Пархомовская</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cosmic: {
+              50:  '#f5f3ff',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+              950: '#2e1065',
+            },
+            gold: '#f0d78c',
+            lotus: '#e879f9',
+          },
+          fontFamily: {
+            display: ['Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --tg-theme-bg-color: #1a0b2e;
+      --tg-theme-text-color: #f5f3ff;
+    }
+    body {
+      background: linear-gradient(180deg, #0f0520 0%, #1a0b2e 40%, #2e1065 100%);
+      min-height: 100vh;
+      color: #f5f3ff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      background: rgba(76, 29, 149, 0.35);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      border-radius: 1.25rem;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+    }
+    .btn-primary:active { transform: scale(0.97); }
+    .lotus-glow {
+      filter: drop-shadow(0 0 12px rgba(232, 121, 249, 0.6));
+    }
+    .price-tag {
+      background: linear-gradient(135deg, #f0d78c, #e8b923);
+      color: #2e1065;
+      font-weight: 700;
+    }
+    .nav-btn.active {
+      color: #e879f9;
+      border-bottom: 2px solid #e879f9;
+    }
+    .hidden { display: none !important; }
+    .fade-in { animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* custom scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 4px; }
+  </style>
+</head>
+<body class="pb-24">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-[#1a0b2e]/90 backdrop-blur-md border-b border-purple-800/40">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl lotus-glow">🪷</span>
+        <div>
+          <div class="text-sm font-semibold text-gold leading-tight">Юлия Пархомовская</div>
+          <div class="text-[10px] text-purple-300">Божественный проводник</div>
+        </div>
+      </div>
+      <button id="btn-admin" class="hidden text-xs px-3 py-1.5 rounded-full bg-purple-700/60 border border-purple-500/40">
+        Админ
+      </button>
+    </div>
+  </header>
+
+  <!-- Screens -->
+  <main id="app" class="px-4 pt-4">
+
+    <!-- HOME -->
+    <section id="screen-home" class="fade-in">
+      <div class="card p-5 mb-5 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNhNzhiZmEiLz48L3N2Zz4=')]"></div>
+        <div class="relative">
+          <div class="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden border-2 border-gold/60 shadow-lg shadow-purple-900/50">
+            <div id="avatar-placeholder" class="w-full h-full bg-gradient-to-br from-purple-600 to-fuchsia-700 flex items-center justify-center text-4xl">🪷</div>
+          </div>
+          <h1 class="text-xl font-display text-gold mb-1">Божественный проводник</h1>
+          <h2 class="text-lg text-purple-100 mb-3">Пархомовская Юлия</h2>
+          <p class="text-sm text-purple-200/90 leading-relaxed mb-4">
+            Целитель · Эмпат · Практик Access · Регрессолог · Кармолог · ЭнергоПрактик · Специалист по работе с подсознанием через Метафорические карты
+          </p>
+          <p class="text-xs text-purple-300/80 italic">
+            «Если вы верите, что в жизни всё не просто так — добро пожаловать»
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mb-6">
+        <button onclick="showScreen('services')" class="card p-4 text-center active:scale-95 transition">
+          <div class="text-3xl mb-2">✨</div>
+          <div class="text-sm font-medium">Услуги</div>
+          <div class="text-[10px] text-purple-300 mt-1">20 практик</div>
+        </button>
+        <button onclick="showScreen('events')" class="card p-4 text-center active:scale-95 transition">
+          <div class="text-3xl mb-2">🎲</div>
+          <div class="text-sm font-medium">Мероприятия</div>
+          <div class="text-[10px] text-purple-300 mt-1">игры & встречи</div>
+        </button>
+        <button onclick="showScreen('contacts')" class="card p-4 text-center active:scale-95 transition">
+          <div class="text-3xl mb-2">💫</div>
+          <div class="text-sm font-medium">Контакты</div>
+          <div class="text-[10px] text-purple-300 mt-1">соцсети</div>
+        </button>
+        <button onclick="showScreen('my')" class="card p-4 text-center active:scale-95 transition">
+          <div class="text-3xl mb-2">📅</div>
+          <div class="text-sm font-medium">Мои записи</div>
+          <div class="text-[10px] text-purple-300 mt-1">история</div>
+        </button>
+      </div>
+
+      <div class="card p-4">
+        <h3 class="text-sm font-semibold text-gold mb-2">Обо мне</h3>
+        <p class="text-xs text-purple-200/90 leading-relaxed">
+          Меня зовут Юлия. Я Проводник Божественных энергий, Духовный психолог, наставник, Целитель, Энергопрактик. Работаю на уровне сознания и подсознания, помогаю людям в решении их проблем. Работаю с МАК-картами, провожу Трансформационные игры. Занимаюсь духовным развитием с 13 лет.
+        </p>
+      </div>
+    </section>
+
+    <!-- SERVICES LIST -->
+    <section id="screen-services" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('home')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold">Услуги и практики</h2>
+      </div>
+      <div id="services-list" class="space-y-3">
+        <!-- filled by JS -->
+      </div>
+    </section>
+
+    <!-- SERVICE DETAIL -->
+    <section id="screen-service" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('services')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold truncate" id="svc-title">Услуга</h2>
+      </div>
+      <div id="service-detail" class="card p-4 mb-4">
+        <!-- filled by JS -->
+      </div>
+      <div class="card p-4 mb-4">
+        <h3 class="text-sm font-semibold text-gold mb-3">Выберите дату и время</h3>
+        <div id="slots-container" class="space-y-2 text-sm text-purple-200">
+          <p class="text-purple-400 text-xs">Пока свободных слотов нет. Напишите Юлии напрямую или оставьте заявку.</p>
+        </div>
+        <button onclick="openBookingForm()" class="btn-primary w-full mt-4 py-3 rounded-xl text-white font-medium">
+          Оставить заявку на запись
+        </button>
+      </div>
+    </section>
+
+    <!-- BOOKING FORM -->
+    <section id="screen-booking" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('service')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold">Запись</h2>
+      </div>
+      <div class="card p-4 space-y-4">
+        <div>
+          <label class="text-xs text-purple-300">Ваше имя *</label>
+          <input id="book-name" type="text" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm focus:outline-none focus:border-purple-400" placeholder="Как к вам обращаться" />
+        </div>
+        <div>
+          <label class="text-xs text-purple-300">Телефон *</label>
+          <input id="book-phone" type="tel" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm focus:outline-none focus:border-purple-400" placeholder="+7 ..." />
+        </div>
+        <div>
+          <label class="text-xs text-purple-300">Желаемая дата / время</label>
+          <input id="book-datetime" type="text" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm focus:outline-none focus:border-purple-400" placeholder="Например: 12 сентября, после 15:00" />
+        </div>
+        <div>
+          <label class="text-xs text-purple-300">Комментарий</label>
+          <textarea id="book-comment" rows="3" class="w-full mt-1 px-3 py-2.5 rounded-xl bg-purple-950/60 border border-purple-700/50 text-white text-sm focus:outline-none focus:border-purple-400" placeholder="Ваш запрос или пожелания"></textarea>
+        </div>
+        <div class="flex items-center gap-3">
+          <label class="flex items-center gap-2 text-sm">
+            <input type="radio" name="format" value="online" checked class="accent-purple-500" /> Онлайн
+          </label>
+          <label class="flex items-center gap-2 text-sm">
+            <input type="radio" name="format" value="offline" class="accent-purple-500" /> Очно (Новороссийск)
+          </label>
+        </div>
+        <button onclick="submitBooking()" class="btn-primary w-full py-3 rounded-xl text-white font-medium">
+          Отправить заявку
+        </button>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section id="screen-events" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('home')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold">Мероприятия и игры</h2>
+      </div>
+      <div id="events-list" class="space-y-3">
+        <div class="card p-4 text-center text-purple-300 text-sm">
+          Пока нет запланированных мероприятий.<br/>Скоро здесь появятся настольные игры и встречи.
+        </div>
+      </div>
+      <div class="mt-6 card p-4">
+        <h3 class="text-sm font-semibold text-gold mb-2">Настольные игры</h3>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Бэнг</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Имаджинариум</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Кодовые имена 18+</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">500 злобных карт</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Покер</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Свинтус</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Нечто</span>
+          <span class="px-2.5 py-1 rounded-full bg-purple-800/50">Бункер</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTS -->
+    <section id="screen-contacts" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('home')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold">Контакты</h2>
+      </div>
+      <div class="space-y-3">
+        <a href="https://t.me/juliuuya" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-[#229ED9] flex items-center justify-center text-xl">✈️</div>
+          <div>
+            <div class="font-medium text-sm">Telegram</div>
+            <div class="text-xs text-purple-300">@juliuuya</div>
+          </div>
+        </a>
+        <a href="https://t.me/celitelsydeb" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-purple-600 flex items-center justify-center text-xl">🪷</div>
+          <div>
+            <div class="font-medium text-sm">Канал целителя</div>
+            <div class="text-xs text-purple-300">t.me/celitelsydeb</div>
+          </div>
+        </a>
+        <a href="https://t.me/meropriyatiyaNovorossiysk" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-fuchsia-700 flex items-center justify-center text-xl">🎲</div>
+          <div>
+            <div class="font-medium text-sm">Мероприятия Новороссийск</div>
+            <div class="text-xs text-purple-300">канал</div>
+          </div>
+        </a>
+        <a href="https://vk.ru/juliuuya" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-[#0077FF] flex items-center justify-center text-white font-bold text-sm">VK</div>
+          <div>
+            <div class="font-medium text-sm">ВКонтакте</div>
+            <div class="text-xs text-purple-300">личный профиль</div>
+          </div>
+        </a>
+        <a href="https://vk.ru/celitelsydeb" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-[#0077FF] flex items-center justify-center text-white font-bold text-sm">VK</div>
+          <div>
+            <div class="font-medium text-sm">Группа целителя</div>
+            <div class="text-xs text-purple-300">услуги и анонсы</div>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/juliuuya" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center text-xl">📷</div>
+          <div>
+            <div class="font-medium text-sm">Instagram</div>
+            <div class="text-xs text-purple-300">@juliuuya</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@juliuuya" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-red-600 flex items-center justify-center text-xl">▶️</div>
+          <div>
+            <div class="font-medium text-sm">YouTube</div>
+            <div class="text-xs text-purple-300">@juliuuya</div>
+          </div>
+        </a>
+        <a href="https://project9290183.tilda.ws/" target="_blank" class="card p-4 flex items-center gap-4 active:scale-[0.98] transition">
+          <div class="w-11 h-11 rounded-full bg-purple-700 flex items-center justify-center text-xl">🌐</div>
+          <div>
+            <div class="font-medium text-sm">Сайт</div>
+            <div class="text-xs text-purple-300">project9290183.tilda.ws</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- MY BOOKINGS -->
+    <section id="screen-my" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('home')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold">Мои записи</h2>
+      </div>
+      <div id="my-bookings" class="space-y-3">
+        <div class="card p-4 text-center text-purple-300 text-sm">Записей пока нет</div>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="screen-admin" class="hidden fade-in">
+      <div class="flex items-center gap-3 mb-4">
+        <button onclick="showScreen('home')" class="text-purple-300 text-lg">←</button>
+        <h2 class="text-lg font-semibold text-gold">Админ-панель</h2>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <button onclick="adminShow('services')" class="card p-3 text-center text-sm">Услуги</button>
+        <button onclick="adminShow('bookings')" class="card p-3 text-center text-sm">Записи</button>
+        <button onclick="adminShow('events')" class="card p-3 text-center text-sm">События</button>
+        <button onclick="adminShow('slots')" class="card p-3 text-center text-sm">Слоты</button>
+      </div>
+      <div id="admin-content" class="space-y-3">
+        <!-- dynamic -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-[#1a0b2e]/95 backdrop-blur-md border-t border-purple-800/40 px-2 py-2 z-50">
+    <div class="flex justify-around">
+      <button onclick="showScreen('home')" class="nav-btn flex flex-col items-center py-1 px-3 text-purple-300 text-xs" data-screen="home">
+        <span class="text-xl">🏠</span>
+        <span>Главная</span>
+      </button>
+      <button onclick="showScreen('services')" class="nav-btn flex flex-col items-center py-1 px-3 text-purple-300 text-xs" data-screen="services">
+        <span class="text-xl">✨</span>
+        <span>Услуги</span>
+      </button>
+      <button onclick="showScreen('events')" class="nav-btn flex flex-col items-center py-1 px-3 text-purple-300 text-xs" data-screen="events">
+        <span class="text-xl">🎲</span>
+        <span>События</span>
+      </button>
+      <button onclick="showScreen('contacts')" class="nav-btn flex flex-col items-center py-1 px-3 text-purple-300 text-xs" data-screen="contacts">
+        <span class="text-xl">💫</span>
+        <span>Контакты</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    // ========== CONFIG ==========
+    // Локально: http://127.0.0.1:8000
+    // После деплоя backend замени на свой URL (например https://yulia-api.onrender.com)
+    const API = window.LOCATION_API || 'http://127.0.0.1:8000';
+    let tg = window.Telegram?.WebApp;
+    let currentUser = null;
+    let isAdmin = false;
+    let services = [];
+    let currentService = null;
+
+    // ========== INIT ==========
+    if (tg) {
+      tg.ready();
+      tg.expand();
+      tg.setHeaderColor('#1a0b2e');
+      tg.setBackgroundColor('#0f0520');
+    }
+
+    async function init() {
+      const tgId = tg?.initDataUnsafe?.user?.id || 5912547447; // fallback for browser test
+      const firstName = tg?.initDataUnsafe?.user?.first_name || 'Тестер';
+      const username = tg?.initDataUnsafe?.user?.username || null;
+
+      try {
+        const res = await fetch(`${API}/api/auth`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ telegram_id: tgId, first_name: firstName, username })
+        });
+        const data = await res.json();
+        currentUser = data.user;
+        isAdmin = data.is_admin;
+        if (isAdmin) {
+          document.getElementById('btn-admin').classList.remove('hidden');
+          document.getElementById('btn-admin').onclick = () => showScreen('admin');
+        }
+      } catch (e) {
+        console.warn('Auth offline mode', e);
+        isAdmin = [1375984482, 5912547447].includes(tgId);
+        if (isAdmin) document.getElementById('btn-admin').classList.remove('hidden');
+      }
+
+      await loadServices();
+      showScreen('home');
+    }
+
+    // ========== NAVIGATION ==========
+    function showScreen(name) {
+      document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+      const el = document.getElementById('screen-' + name);
+      if (el) {
+        el.classList.remove('hidden');
+        el.classList.add('fade-in');
+      }
+      document.querySelectorAll('.nav-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.screen === name);
+      });
+      window.scrollTo(0, 0);
+
+      if (name === 'services') renderServices();
+      if (name === 'my') loadMyBookings();
+      if (name === 'admin') adminShow('bookings');
+      if (name === 'events') loadEvents();
+    }
+
+    // ========== SERVICES ==========
+    async function loadServices() {
+      try {
+        const res = await fetch(`${API}/api/services`);
+        services = await res.json();
+      } catch (e) {
+        console.error(e);
+        services = [];
+      }
+    }
+
+    function renderServices() {
+      const container = document.getElementById('services-list');
+      if (!services.length) {
+        container.innerHTML = '<div class="card p-4 text-center text-purple-300">Загрузка...</div>';
+        return;
+      }
+      container.innerHTML = services.map(s => `
+        <button onclick="openService(${s.id})" class="card p-4 w-full text-left active:scale-[0.98] transition flex gap-3">
+          <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-600 to-fuchsia-700 flex-shrink-0 flex items-center justify-center text-2xl overflow-hidden">
+            ${s.image_url ? `<img src="${API}${s.image_url}" class="w-full h-full object-cover"/>` : '🪷'}
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="text-sm font-medium leading-snug line-clamp-2">${s.title}</div>
+            <div class="text-[11px] text-purple-300 mt-1 line-clamp-1">${s.short_description || ''}</div>
+            <div class="mt-2 flex items-center gap-2">
+              <span class="price-tag text-xs px-2 py-0.5 rounded-full">${s.price.toLocaleString('ru')} ₽</span>
+              <span class="text-[10px] text-purple-400">${s.duration_minutes} мин</span>
+              ${s.is_online ? '<span class="text-[10px] text-cyan-400">онлайн</span>' : ''}
+              ${s.is_offline ? '<span class="text-[10px] text-amber-300">очно</span>' : ''}
+            </div>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    async function openService(id) {
+      currentService = services.find(s => s.id === id);
+      if (!currentService) {
+        try {
+          const res = await fetch(`${API}/api/services/${id}`);
+          currentService = await res.json();
+        } catch(e) { return; }
+      }
+      document.getElementById('svc-title').textContent = currentService.title.slice(0, 40) + (currentService.title.length > 40 ? '…' : '');
+      document.getElementById('service-detail').innerHTML = `
+        <div class="text-center mb-4">
+          <div class="w-full h-40 rounded-xl bg-gradient-to-br from-purple-700 to-fuchsia-800 flex items-center justify-center text-5xl mb-3 overflow-hidden">
+            ${currentService.image_url ? `<img src="${API}${currentService.image_url}" class="w-full h-full object-cover"/>` : '🪷'}
+          </div>
+          <h3 class="font-semibold text-gold text-base leading-snug">${currentService.title}</h3>
+          <div class="mt-2 flex justify-center gap-2">
+            <span class="price-tag text-sm px-3 py-1 rounded-full">${currentService.price.toLocaleString('ru')} ₽</span>
+            <span class="text-xs text-purple-300 self-center">${currentService.duration_minutes} мин</span>
+          </div>
+        </div>
+        <p class="text-sm text-purple-100/90 leading-relaxed whitespace-pre-line">${currentService.description || currentService.short_description || ''}</p>
+      `;
+      showScreen('service');
+      loadSlots(id);
+    }
+
+    async function loadSlots(serviceId) {
+      const box = document.getElementById('slots-container');
+      try {
+        const res = await fetch(`${API}/api/slots?service_id=${serviceId}&available_only=true`);
+        const slots = await res.json();
+        if (!slots.length) {
+          box.innerHTML = '<p class="text-purple-400 text-xs">Свободных слотов пока нет. Оставьте заявку — Юлия свяжется с вами.</p>';
+          return;
+        }
+        box.innerHTML = slots.map(s => `
+          <button class="w-full text-left px-3 py-2 rounded-lg bg-purple-900/40 border border-purple-700/40 text-sm">
+            ${formatDate(s.datetime_start)} ${s.is_online ? '🌐' : '📍'}
+          </button>
+        `).join('');
+      } catch(e) {
+        box.innerHTML = '<p class="text-purple-400 text-xs">Не удалось загрузить слоты</p>';
+      }
+    }
+
+    function openBookingForm() {
+      if (!currentService) return;
+      showScreen('booking');
+      // prefill name from TG
+      if (tg?.initDataUnsafe?.user?.first_name) {
+        document.getElementById('book-name').value = tg.initDataUnsafe.user.first_name;
+      }
+    }
+
+    async function submitBooking() {
+      const name = document.getElementById('book-name').value.trim();
+      const phone = document.getElementById('book-phone').value.trim();
+      const dt = document.getElementById('book-datetime').value.trim();
+      const comment = document.getElementById('book-comment').value.trim();
+      const isOnline = document.querySelector('input[name="format"]:checked').value === 'online';
+
+      if (!name || !phone) {
+        alert('Укажите имя и телефон');
+        return;
+      }
+
+      const tgId = tg?.initDataUnsafe?.user?.id || 5912547447;
+
+      try {
+        const res = await fetch(`${API}/api/bookings`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Telegram-Id': tgId
+          },
+          body: JSON.stringify({
+            service_id: currentService.id,
+            datetime_start: dt || new Date().toISOString(),
+            client_name: name,
+            client_phone: phone,
+            client_comment: comment,
+            is_online: isOnline
+          })
+        });
+        if (!res.ok) throw new Error(await res.text());
+        alert('Заявка отправлена! Юлия свяжется с вами в ближайшее время.');
+        showScreen('my');
+        loadMyBookings();
+      } catch (e) {
+        console.error(e);
+        alert('Ошибка отправки. Попробуйте позже или напишите напрямую @juliuuya');
+      }
+    }
+
+    // ========== MY BOOKINGS ==========
+    async function loadMyBookings() {
+      const box = document.getElementById('my-bookings');
+      const tgId = tg?.initDataUnsafe?.user?.id || 5912547447;
+      try {
+        const res = await fetch(`${API}/api/bookings/my`, {
+          headers: { 'X-Telegram-Id': tgId }
+        });
+        const list = await res.json();
+        if (!list.length) {
+          box.innerHTML = '<div class="card p-4 text-center text-purple-300 text-sm">Записей пока нет</div>';
+          return;
+        }
+        box.innerHTML = list.map(b => `
+          <div class="card p-4">
+            <div class="text-sm font-medium">${b.service_title || 'Услуга'}</div>
+            <div class="text-xs text-purple-300 mt-1">${formatDate(b.datetime_start)}</div>
+            <div class="mt-2 flex justify-between items-center">
+              <span class="text-xs px-2 py-0.5 rounded-full ${statusColor(b.status)}">${statusText(b.status)}</span>
+              ${b.status === 'pending' || b.status === 'confirmed' ? 
+                `<button onclick="cancelBooking(${b.id})" class="text-xs text-red-400">Отменить</button>` : ''}
+            </div>
+          </div>
+        `).join('');
+      } catch(e) {
+        box.innerHTML = '<div class="card p-4 text-center text-purple-300 text-sm">Не удалось загрузить</div>';
+      }
+    }
+
+    async function cancelBooking(id) {
+      if (!confirm('Отменить запись?')) return;
+      const tgId = tg?.initDataUnsafe?.user?.id || 5912547447;
+      await fetch(`${API}/api/bookings/${id}/cancel`, {
+        method: 'POST',
+        headers: { 'X-Telegram-Id': tgId }
+      });
+      loadMyBookings();
+    }
+
+    // ========== EVENTS ==========
+    async function loadEvents() {
+      const box = document.getElementById('events-list');
+      try {
+        const res = await fetch(`${API}/api/events`);
+        const list = await res.json();
+        if (!list.length) {
+          box.innerHTML = `<div class="card p-4 text-center text-purple-300 text-sm">
+            Пока нет запланированных мероприятий.<br/>Скоро здесь появятся настольные игры и встречи.
+          </div>`;
+          return;
+        }
+        box.innerHTML = list.map(e => `
+          <div class="card p-4">
+            <div class="font-medium text-sm">${e.title}</div>
+            <div class="text-xs text-purple-300 mt-1">${formatDate(e.datetime_start)} ${e.is_online ? '🌐' : '📍 ' + (e.place||'')}</div>
+            <div class="text-xs text-purple-200 mt-2 line-clamp-2">${e.description || ''}</div>
+            <div class="mt-3 flex justify-between items-center">
+              <span class="price-tag text-xs px-2 py-0.5 rounded-full">${e.price ? e.price.toLocaleString('ru') + ' ₽' : 'бесплатно'}</span>
+              <span class="text-[10px] text-purple-400">${e.current_participants}${e.max_participants ? '/' + e.max_participants : ''} участников</span>
+            </div>
+          </div>
+        `).join('');
+      } catch(e) {
+        box.innerHTML = '<div class="card p-4 text-center text-purple-300 text-sm">Ошибка загрузки</div>';
+      }
+    }
+
+    // ========== ADMIN ==========
+    const tgId = () => tg?.initDataUnsafe?.user?.id || 5912547447;
+    const adminHeaders = () => ({
+      'Content-Type': 'application/json',
+      'X-Telegram-Id': tgId()
+    });
+
+    async function adminShow(tab) {
+      const box = document.getElementById('admin-content');
+      
+      if (tab === 'bookings') {
+        try {
+          const res = await fetch(`${API}/api/admin/bookings`, { headers: { 'X-Telegram-Id': tgId() }});
+          const list = await res.json();
+          if (!list.length) {
+            box.innerHTML = '<div class="card p-4 text-center text-purple-300 text-sm">Записей нет</div>';
+            return;
+          }
+          box.innerHTML = list.map(b => `
+            <div class="card p-3 text-sm">
+              <div class="font-medium">${b.service_title || '—'}</div>
+              <div class="text-xs text-purple-300 mt-1">${b.client_name} · ${b.client_phone}</div>
+              <div class="text-xs text-purple-400">${formatDate(b.datetime_start)} · ${b.is_online ? 'онлайн' : 'очно'}</div>
+              ${b.client_comment ? `<div class="text-xs text-purple-200 mt-1 italic">${b.client_comment}</div>` : ''}
+              <div class="mt-2">
+                <select onchange="updateBookingStatus(${b.id}, this.value)" class="text-xs bg-purple-900 border border-purple-700 rounded px-2 py-1 w-full">
+                  <option value="pending" ${b.status==='pending'?'selected':''}>ожидает</option>
+                  <option value="confirmed" ${b.status==='confirmed'?'selected':''}>подтверждена</option>
+                  <option value="cancelled" ${b.status==='cancelled'?'selected':''}>отменена</option>
+                  <option value="completed" ${b.status==='completed'?'selected':''}>завершена</option>
+                </select>
+              </div>
+            </div>
+          `).join('');
+        } catch(e) {
+          box.innerHTML = '<div class="card p-4 text-red-300 text-sm">Нет доступа или ошибка</div>';
+        }
+      }
+
+      if (tab === 'services') {
+        await loadServices();
+        box.innerHTML = `
+          <button onclick="showServiceEditor(null)" class="btn-primary w-full py-3 rounded-xl text-white text-sm mb-3">
+            + Добавить новую услугу
+          </button>
+          ${services.map(s => `
+            <div class="card p-3 text-sm mb-2">
+              <div class="flex justify-between items-start gap-2">
+                <div class="min-w-0 flex-1">
+                  <div class="font-medium leading-snug">${s.title}</div>
+                  <div class="text-xs text-purple-300 mt-1">${s.price} ₽ · ${s.duration_minutes} мин · ${s.is_active ? '✅ активна' : '🚫 скрыта'}</div>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <button onclick="showServiceEditor(${s.id})" class="text-xs px-2 py-1 rounded bg-purple-700">✏️</button>
+                  <button onclick="toggleService(${s.id}, ${s.is_active})" class="text-xs px-2 py-1 rounded bg-purple-800">${s.is_active ? '🙈' : '👁'}</button>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        `;
+      }
+
+      if (tab === 'events') {
+        try {
+          const res = await fetch(`${API}/api/events?upcoming=false&active_only=false`);
+          const list = await res.json();
+          box.innerHTML = `
+            <button onclick="showEventEditor()" class="btn-primary w-full py-3 rounded-xl text-white text-sm mb-3">
+              + Создать мероприятие
+            </button>
+            ${list.length ? list.map(e => `
+              <div class="card p-3 text-sm mb-2">
+                <div class="font-medium">${e.title}</div>
+                <div class="text-xs text-purple-300 mt-1">${formatDate(e.datetime_start)} · ${e.price || 0} ₽</div>
+                <div class="text-xs text-purple-400">${e.is_active ? 'активно' : 'скрыто'} · ${e.current_participants || 0}${e.max_participants ? '/'+e.max_participants : ''} чел.</div>
+              </div>
+            `).join('') : '<div class="card p-4 text-center text-purple-300 text-sm">Мероприятий пока нет</div>'}
+          `;
+        } catch(e) {
+          box.innerHTML = '<div class="card p-4 text-red-300 text-sm">Ошибка загрузки</div>';
+        }
+      }
+
+      if (tab === 'slots') {
+        box.innerHTML = `
+          <button onclick="showSlotEditor()" class="btn-primary w-full py-3 rounded-xl text-white text-sm mb-3">
+            + Добавить свободный слот
+          </button>
+          <div class="card p-4 text-xs text-purple-300">
+            Здесь можно добавлять свободные даты и время для записи.<br/><br/>
+            Клиент увидит эти слоты на странице услуги.
+          </div>
+        `;
+      }
+    }
+
+    function showServiceEditor(id) {
+      const s = id ? services.find(x => x.id === id) : null;
+      const box = document.getElementById('admin-content');
+      box.innerHTML = `
+        <div class="card p-4 space-y-3">
+          <h3 class="text-gold font-semibold">${s ? 'Редактировать услугу' : 'Новая услуга'}</h3>
+          <div>
+            <label class="text-xs text-purple-300">Название *</label>
+            <input id="ed-title" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" value="${s?.title || ''}" />
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Краткое описание</label>
+            <input id="ed-short" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" value="${s?.short_description || ''}" />
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Полное описание</label>
+            <textarea id="ed-desc" rows="5" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm">${s?.description || ''}</textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-purple-300">Цена (₽)</label>
+              <input id="ed-price" type="number" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" value="${s?.price || 0}" />
+            </div>
+            <div>
+              <label class="text-xs text-purple-300">Длительность (мин)</label>
+              <input id="ed-duration" type="number" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" value="${s?.duration_minutes || 60}" />
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-4 text-sm">
+            <label class="flex items-center gap-2"><input type="checkbox" id="ed-online" ${s?.is_online !== 0 ? 'checked' : ''}/> Онлайн</label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="ed-offline" ${s?.is_offline !== 0 ? 'checked' : ''}/> Очно</label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="ed-active" ${s?.is_active !== 0 ? 'checked' : ''}/> Активна</label>
+            <label class="flex items-center gap-2"><input type="checkbox" id="ed-pay" ${s?.payment_required ? 'checked' : ''}/> Оплата сразу</label>
+          </div>
+          <div class="flex gap-2 pt-2">
+            <button onclick="saveService(${id || 'null'})" class="btn-primary flex-1 py-2.5 rounded-xl text-white text-sm">Сохранить</button>
+            <button onclick="adminShow('services')" class="flex-1 py-2.5 rounded-xl bg-purple-900 text-sm">Отмена</button>
+          </div>
+        </div>
+      `;
+    }
+
+    async function saveService(id) {
+      const payload = {
+        title: document.getElementById('ed-title').value.trim(),
+        short_description: document.getElementById('ed-short').value.trim(),
+        description: document.getElementById('ed-desc').value.trim(),
+        price: parseInt(document.getElementById('ed-price').value) || 0,
+        duration_minutes: parseInt(document.getElementById('ed-duration').value) || 60,
+        is_online: document.getElementById('ed-online').checked,
+        is_offline: document.getElementById('ed-offline').checked,
+        is_active: document.getElementById('ed-active').checked,
+        payment_required: document.getElementById('ed-pay').checked
+      };
+      if (!payload.title) { alert('Укажите название'); return; }
+
+      try {
+        if (id) {
+          await fetch(`${API}/api/admin/services/${id}`, {
+            method: 'PATCH', headers: adminHeaders(), body: JSON.stringify(payload)
+          });
+        } else {
+          await fetch(`${API}/api/admin/services`, {
+            method: 'POST', headers: adminHeaders(), body: JSON.stringify(payload)
+          });
+        }
+        await loadServices();
+        adminShow('services');
+        alert('Сохранено!');
+      } catch(e) {
+        alert('Ошибка сохранения');
+      }
+    }
+
+    function showEventEditor() {
+      const box = document.getElementById('admin-content');
+      box.innerHTML = `
+        <div class="card p-4 space-y-3">
+          <h3 class="text-gold font-semibold">Новое мероприятие</h3>
+          <div>
+            <label class="text-xs text-purple-300">Название *</label>
+            <input id="ev-title" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" />
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Описание</label>
+            <textarea id="ev-desc" rows="3" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm"></textarea>
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Дата и время начала *</label>
+            <input id="ev-start" type="datetime-local" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" />
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Место / адрес</label>
+            <input id="ev-place" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" placeholder="или оставьте пустым для онлайн" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-purple-300">Цена (₽)</label>
+              <input id="ev-price" type="number" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" value="0" />
+            </div>
+            <div>
+              <label class="text-xs text-purple-300">Макс. участников (0 = ∞)</label>
+              <input id="ev-max" type="number" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" value="0" />
+            </div>
+          </div>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="ev-online"/> Онлайн</label>
+          <div class="flex gap-2 pt-2">
+            <button onclick="saveEvent()" class="btn-primary flex-1 py-2.5 rounded-xl text-white text-sm">Создать</button>
+            <button onclick="adminShow('events')" class="flex-1 py-2.5 rounded-xl bg-purple-900 text-sm">Отмена</button>
+          </div>
+        </div>
+      `;
+    }
+
+    async function saveEvent() {
+      const title = document.getElementById('ev-title').value.trim();
+      const start = document.getElementById('ev-start').value;
+      if (!title || !start) { alert('Укажите название и дату'); return; }
+      const payload = {
+        title,
+        description: document.getElementById('ev-desc').value.trim(),
+        datetime_start: new Date(start).toISOString(),
+        place: document.getElementById('ev-place').value.trim() || null,
+        price: parseInt(document.getElementById('ev-price').value) || 0,
+        max_participants: parseInt(document.getElementById('ev-max').value) || 0,
+        is_online: document.getElementById('ev-online').checked,
+        is_active: true
+      };
+      try {
+        await fetch(`${API}/api/admin/events`, {
+          method: 'POST', headers: adminHeaders(), body: JSON.stringify(payload)
+        });
+        adminShow('events');
+        alert('Мероприятие создано!');
+      } catch(e) {
+        alert('Ошибка');
+      }
+    }
+
+    function showSlotEditor() {
+      const box = document.getElementById('admin-content');
+      const opts = services.map(s => `<option value="${s.id}">${s.title.slice(0,40)}</option>`).join('');
+      box.innerHTML = `
+        <div class="card p-4 space-y-3">
+          <h3 class="text-gold font-semibold">Новый слот</h3>
+          <div>
+            <label class="text-xs text-purple-300">Услуга (необязательно)</label>
+            <select id="sl-service" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm">
+              <option value="">Общий слот</option>
+              ${opts}
+            </select>
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Начало *</label>
+            <input id="sl-start" type="datetime-local" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" />
+          </div>
+          <div>
+            <label class="text-xs text-purple-300">Конец</label>
+            <input id="sl-end" type="datetime-local" class="w-full mt-1 px-3 py-2 rounded-xl bg-purple-950/60 border border-purple-700/50 text-sm" />
+          </div>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="sl-online"/> Онлайн</label>
+          <div class="flex gap-2 pt-2">
+            <button onclick="saveSlot()" class="btn-primary flex-1 py-2.5 rounded-xl text-white text-sm">Добавить</button>
+            <button onclick="adminShow('slots')" class="flex-1 py-2.5 rounded-xl bg-purple-900 text-sm">Отмена</button>
+          </div>
+        </div>
+      `;
+    }
+
+    async function saveSlot() {
+      const start = document.getElementById('sl-start').value;
+      if (!start) { alert('Укажите время начала'); return; }
+      const endVal = document.getElementById('sl-end').value;
+      const payload = {
+        service_id: document.getElementById('sl-service').value || null,
+        datetime_start: new Date(start).toISOString(),
+        datetime_end: endVal ? new Date(endVal).toISOString() : new Date(new Date(start).getTime() + 60*60*1000).toISOString(),
+        is_online: document.getElementById('sl-online').checked,
+        is_available: true
+      };
+      try {
+        await fetch(`${API}/api/admin/slots`, {
+          method: 'POST', headers: adminHeaders(), body: JSON.stringify(payload)
+        });
+        adminShow('slots');
+        alert('Слот добавлен!');
+      } catch(e) {
+        alert('Ошибка');
+      }
+    }
+
+    async function updateBookingStatus(id, status) {
+      await fetch(`${API}/api/admin/bookings/${id}/status?status=${status}`, {
+        method: 'PATCH', headers: { 'X-Telegram-Id': tgId() }
+      });
+    }
+
+    async function toggleService(id, current) {
+      await fetch(`${API}/api/admin/services/${id}`, {
+        method: 'PATCH', headers: adminHeaders(),
+        body: JSON.stringify({ is_active: !current })
+      });
+      await loadServices();
+      adminShow('services');
+    }
+
+    // ========== HELPERS ==========
+    function formatDate(iso) {
+      if (!iso) return '—';
+      try {
+        const d = new Date(iso);
+        return d.toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+      } catch { return iso; }
+    }
+    function statusText(s) {
+      return { pending: 'ожидает', confirmed: 'подтверждена', cancelled: 'отменена', completed: 'завершена' }[s] || s;
+    }
+    function statusColor(s) {
+      return {
+        pending: 'bg-amber-900/50 text-amber-200',
+        confirmed: 'bg-green-900/50 text-green-200',
+        cancelled: 'bg-red-900/50 text-red-200',
+        completed: 'bg-purple-900/50 text-purple-200'
+      }[s] || 'bg-gray-800';
+    }
+
+    // Start
+    init();
+  </script>
+</body>
+</html>
